@@ -6,16 +6,24 @@ The idea is that any given project has some common commands that need to be run,
 so we create a Projectfile or Cmdfile or Projection file or Project.ion or
 whatever, and it's basically like a Makefile, Vagrantfile, what have you, but
 what it does is dynamically configure the commands that can be run via the
-"project" command."
+"project" command.
 
 So you can think of project as 'project'ing your shortened/cleaned up commands
 from the short version to the full version.
 
-## Benefits / Justification
+## Benefits / Justification vs Other Tools
 
-- Less typing / thinking / etc
-- Projectfile doubles as (always in sync) documentation of common project
-  activities.
+- Advantages/Disadvantages vs Not Having It
+  - Less typing / thinking / etc
+  - Projectfile doubles as (always in sync) documentation of common project
+    activities.
+
+- Advantages/Disadvantages vs Makefiles
+  - More reasonable argument handling -- skip recursive make calls with
+    environment variables set, etc.
+
+- Advantages/Disadvantages vs shell aliases
+  - stuff
 
 ## Open Questions
 
