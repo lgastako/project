@@ -11,10 +11,19 @@
           (string->jsexpr contents)))))
 
   (define (parse-args)
-    (command-line
-     #:program "Project Specific Commands"
-     #:args (foo)
-     foo))
+    (display "Current command line args: ")
+    (newline)
+    (pretty-print (current-command-line-arguments))
+    (newline)
+    #f)
+
+  (define (display-help config)
+    (display "Would display help here.")
+    (newline)
+    (display "Config:")
+    (newline)
+    (pretty-print config)
+    #t)
 
   (define (execute-command config)
     (display "Would execute command here")
@@ -23,4 +32,6 @@
 
   (let ([config (load-config)])
     (let ([cmdline (parse-args)])
-      (execute-command config))))
+      (if (not cmdline)
+          (display-help config)
+          (execute-command config)))))
