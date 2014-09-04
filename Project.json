@@ -1,0 +1,20 @@
+{
+    "commands": {
+        "build": {
+            "in": "$(DIR:.)",
+            "out": "docker build $(DIR)"
+        },
+        "run": {
+            "in": "$(CONTAINER_ID) $(PROG:/bin/bash)",
+            "out": "docker run $(CONTAINER_ID) -t -i $(PROG)"
+        },
+        "shell": {
+            "in": "$(CONTAINER_ID)",
+            "out": "project run $(CONTAINER_ID)"
+        },
+        "vm": {
+            "in": "up",
+            "out": "vagrant up"
+        }
+    }
+}

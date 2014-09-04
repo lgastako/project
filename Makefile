@@ -16,5 +16,9 @@ build: $(BINARY)
 run: build
 	$(BINARY)
 
+help: build
+	$(BINARY) --help
+
 b: build
 r: run
+h: help

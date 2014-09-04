@@ -1,32 +1,26 @@
 (module project racket
 
+  (require json)
+  (require racket/pretty)
+
   (define (load-config)
-    (display "Would load config here")
-    (newline)
-    true)
+    (with-input-from-file "Project.json"
+      (lambda ()
+        ;; TODO: Actually process buffer instead of 999999
+        (let* ([contents (read-string 999999)])
+          (string->jsexpr contents)))))
 
   (define (parse-args)
-    (display "Would parse args here")
-    (newline)
-    true)
-
-  (define (help-requested? cmdline)
-    (display "Would check for help request here")
-    (newline)
-    true)
-
-  (define (display-help config)
-    (display "Would display help here")
-    (newline)
-    true)
+    (command-line
+     #:program "Project Specific Commands"
+     #:args (foo)
+     foo))
 
   (define (execute-command config)
     (display "Would execute command here")
     (newline)
     true)
 
-  (let ([config (load-config)]
-        [cmdline (parse-args)])
-    (if (help-requested? cmdline)
-        (display-help config)
-        (execute-command config))))
+  (let ([config (load-config)])
+    (let ([cmdline (parse-args)])
+      (execute-command config))))
