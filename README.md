@@ -90,6 +90,12 @@ it would be something like this:
       --moored      Moored (anchored) mine.
       --drifting    Drifting mine.
 
+## Shortcuts
+
+You can define shortcuts, like "b" for "build" or "r" for run.  Then you can
+alias "p" to "project" and end up typing commands like "p b" for "project build"
+which gets further expanded, etc.
+
 ## blah blah
 
 - You can use extra commands in the config file to override e.g. the "Project Commands" name, etc.

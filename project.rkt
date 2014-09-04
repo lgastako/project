@@ -1,22 +1,22 @@
 (module project racket
 
   (define (load-config)
-    (print "Would load config here")
+    (display "Would load config here")
     (newline)
     true)
 
   (define (help-requested? cmdline)
-    (print "Would check for help request here")
+    (display "Would check for help request here")
     (newline)
     true)
 
   (define (display-help config)
-    (print "Would display help here")
+    (display "Would display help here")
     (newline)
     true)
 
   (define (execute-command config)
-    (print "Would execute command here")
+    (display "Would execute command here")
     (newline)
     true)
 
