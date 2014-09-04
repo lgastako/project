@@ -8,7 +8,7 @@ whatever, and it's basically like a Makefile, Vagrantfile, what have you, but
 what it does is dynamically configure the commands that can be run via the
 "project" command."
 
-So you can think of project as projecting your shortened/cleaned up commands
+So you can think of project as 'project'ing your shortened/cleaned up commands
 from the short version to the full version.
 
 ## Benefits / Justification
