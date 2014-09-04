@@ -8,6 +8,9 @@ all:
 clean:
 	\rm -rf ./project.app
 
+install-deps:
+	$(RACO) pkg install "git://github.com/adolfopa/racket-mustache.git?path=mustache"
+
 $(BINARY): project.rkt
 	$(RACO) exe --gui project.rkt
 
