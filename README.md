@@ -73,22 +73,19 @@ etc...
 The --help output will be generated automatically.  E.g. for the example above,
 it would be something like this:
 
-    Project Commands.
+    Project Specific Commands
 
     Usage:
-      naval_fate ship new <name>...
-      naval_fate ship <name> move <x> <y> [--speed=<kn>]
-      naval_fate ship shoot <x> <y>
-      naval_fate mine (set|remove) <x> <y> [--moored|--drifting]
-      naval_fate -h | --help
-      naval_fate --version
+      project build [<dir>]
+      project run <container_id> [<prog>]
+      project shell <container_id>
+      project vm [up|down]
+      project -h | --help
+      project --version
 
     Options:
       -h --help     Show this screen.
       --version     Show version.
-      --speed=<kn>  Speed in knots [default: 10].
-      --moored      Moored (anchored) mine.
-      --drifting    Drifting mine.
 
 ## Shortcuts
 
@@ -98,7 +95,7 @@ which gets further expanded, etc.
 
 ## blah blah
 
-- You can use extra commands in the config file to override e.g. the "Project Commands" name, etc.
+- You can use extra commands in the config file to override e.g. the "Project Specific Commands" name, etc.
 - When you have the output of a command generate a new "project ..." by default the command will
   be optimized and processed internally rather than creating multiple levels of shells, etc.
   You can override this behavior, if for some reason that is necessary, by providing the blah blah
@@ -126,3 +123,13 @@ which gets further expanded, etc.
             }
         }
     }
+
+## TODO: Come up with a better name.
+
+- Context? ctx?
+  eg. "ctx build blah" or "c b blah"
+
+- do
+  eg. "do build blah" or "d b blah"
+
+- Something arbitrary like gulp/grunt/etc
