@@ -11,11 +11,15 @@
           (string->jsexpr contents)))))
 
   (define (parse-args)
-    (display "Current command line args: ")
-    (newline)
-    (pretty-print (current-command-line-arguments))
-    (newline)
-    #f)
+    (let ([args (current-command-line-arguments)])
+      (display "Current command line args: ")
+      (newline)
+      (pretty-print args)
+      (newline)
+      args))
+
+  (define (help-requested? cmdline)
+    (not (not (vector-member "--help" cmdline))))
 
   (define (display-help config)
     (display "Would display help here.")
@@ -32,6 +36,6 @@
 
   (let ([config (load-config)])
     (let ([cmdline (parse-args)])
-      (if (not cmdline)
+      (if (help-requested? cmdline)
           (display-help config)
           (execute-command config)))))

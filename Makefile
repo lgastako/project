@@ -16,9 +16,13 @@ build: $(BINARY)
 run: build
 	$(BINARY)
 
+run-example: build
+	$(BINARY) foo bar baz bif
+
 help: build
 	$(BINARY) --help
 
 b: build
 r: run
+rx: run-example
 h: help
