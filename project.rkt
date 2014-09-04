@@ -5,6 +5,11 @@
     (newline)
     true)
 
+  (define (parse-args)
+    (display "Would parse args here")
+    (newline)
+    true)
+
   (define (help-requested? cmdline)
     (display "Would check for help request here")
     (newline)
@@ -21,7 +26,7 @@
     true)
 
   (let ([config (load-config)]
-        [cmdline (parse-command-line)])
+        [cmdline (parse-args)])
     (if (help-requested? cmdline)
         (display-help config)
         (execute-command config))))
