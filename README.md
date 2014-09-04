@@ -2,6 +2,10 @@
 
 Yes, this project is named "project."  Good luck searching for it. :)
 
+This project also is nowhere near working.  I'm trying to spec it out via
+writing this README as if it were already complete.  Then I'll build to that
+spec.
+
 The idea is that any given project has some common commands that need to be run,
 so we create a Projectfile or Cmdfile or Projection file or Project.ion or
 whatever, and it's basically like a Makefile, Vagrantfile, what have you, but
@@ -15,23 +19,20 @@ from the short version to the full version.
 
 - Advantages/Disadvantages vs Not Having It
   - Less typing / thinking / etc
-  - Projectfile doubles as (always in sync) documentation of common project
-    activities.
+  - Discoverability of core project activities.
+  - Projectfile doubles as (always in sync) documentation of the same.
 
 - Advantages/Disadvantages vs Makefiles
   - More reasonable argument handling -- skip recursive make calls with
     environment variables set, etc.
 
 - Advantages/Disadvantages vs shell aliases
-  - stuff
+  - Auto-generated documentation
+  - Stored by project instead of by person
 
-## Open Questions
-
-- What about chaining commands? We don't want to get too crazy and reimplement
-  all of shell scripting or Makefiles or whatever but there at least have to be
-  some common patterns we could support, like maybe just having "out": be an
-  array of commands instead of a string, and treating them all as being joined
-  by && in shell, etc.  Actually I think that is the one really common case.
+- Advantages/Disadvantages vs Gulp, Grunt, etc.
+  - Fast native binary
+  - No external dependencies like node, ruby, clojure, etc
 
 ## Example
 
@@ -90,6 +91,18 @@ which would allow for
 
 etc...
 
+## Chaining Commands
+
+When you use a "project foo ..." command as command in the out list project will
+
+- What about chaining commands? We don't want to get too crazy and reimplement
+  all of shell scripting or Makefiles or whatever but there at least have to be
+  some common patterns we could support, like maybe just having "out": be an
+  array of commands instead of a string, and treating them all as being joined
+  by && in shell, etc.  Actually I think that is the one really common case.
+
+
+
 ## Help generation
 
 The --help output will be generated automatically.  E.g. for the example above,
@@ -146,12 +159,55 @@ which gets further expanded, etc.
         }
     }
 
-## TODO: Come up with a better name.
+## TODO
 
-- Context? ctx?
-  eg. "ctx build blah" or "c b blah"
+- Come up with a better name.
 
-- do
-  eg. "do build blah" or "d b blah"
+  - Context? ctx?
+    eg. "ctx build blah" or "c b blah"
 
-- Something arbitrary like gulp/grunt/etc
+  - do
+    eg. "do build blah" or "d b blah"
+
+  - pro
+    - (short for project, but also like a pro...)
+
+  - boss
+    - (kinda in the same vein but probably slightly more searchable? and maybe
+       more badass)
+
+  - ject
+    - the latter half of "project"
+
+  - j for ject/john
+
+  - re
+    - because you're always re-doing the same things, thats why you made them into commands
+      - re build
+      - re up
+      - re compile
+      - re css
+      - hmmmm
+    - how searchable is "re" though? but "re commander" or something... where
+      the command is "re" but the name is longer... "re command line steroids"
+      or "re-alias" ? think more
+
+  - Something arbitrary like gulp/grunt/etc
+
+- Decide on filename for "Projectfile".
+
+- Decide on format(s) for projectfile.
+  - Viable contenders:
+    - JSON
+    - Custom language (hey we're already in racket...)
+      - What would this look like? There's a start above but it needs to be fleshed out.
+  - Pros/cons of both approaches.
+    - pro JSON: ubuiquitous
+    - pro JSON: existing syntax highlighting and other editor support
+    - pro custom: custom crafted with love for this exact situation
+    - con custom: requires much more thought/effort/dilligence/time/etc to get right
+  - Pros/cons of having one format vs supporting JSON and a custom one
+    - con of having both
+      - upfront dev costs are higher
+      - lifetime support costs are higher
+
