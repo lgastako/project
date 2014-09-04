@@ -1,6 +1,6 @@
 # project
 
-## Yes, this project is named "project."  Good luck searching for it. :)
+Yes, this project is named "project."  Good luck searching for it. :)
 
 The idea is that any given project has some common commands that need to be run,
 so we create a Projectfile or Cmdfile or Projection file or Project.ion or
@@ -10,6 +10,20 @@ what it does is dynamically configure the commands that can be run via the
 
 So you can think of project as projecting your shortened/cleaned up commands
 from the short version to the full version.
+
+## Benefits / Justification
+
+- Less typing / thinking / etc
+- Projectfile doubles as (always in sync) documentation of common project
+  activities.
+
+## Open Questions
+
+- What about chaining commands? We don't want to get too crazy and reimplement
+  all of shell scripting or Makefiles or whatever but there at least have to be
+  some common patterns we could support, like maybe just having "out": be an
+  array of commands instead of a string, and treating them all as being joined
+  by && in shell, etc.  Actually I think that is the one really common case.
 
 ## Example
 
