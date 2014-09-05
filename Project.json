@@ -1,4 +1,7 @@
 {
+    "project": {
+        "name": "Self Demo - Project Specific Commands"
+    },
     "commands": {
         "build": {
             "in": "$(DIR:.)",

@@ -1,14 +1,15 @@
 RACO=raco
 
-BINARY=./project.app/Contents/MacOS/project
+BINARY=./project
 
 INSTALL_DIR=~/local/bin
 
 all:
 	@cat Makefile
 
+#$(RACO) exe --gui project.rkt
 $(BINARY): project.rkt
-	$(RACO) exe --gui project.rkt
+	$(RACO) exe project.rkt
 
 build: $(BINARY)
 
