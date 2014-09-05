@@ -24,8 +24,16 @@
     (newline)
     args))
 
-(define (execute-command config)
-  (display "Would execute command here")
+(define (execute-command config cmdline)
+  (display "Would execute command here.")
+  (newline)
+  (display "Config:")
+  (newline)
+  (pretty-print config)
+  (newline)
+  (display "Command Line:")
+  (newline)
+  (pretty-print cmdline)
   (newline)
   true)
 
@@ -36,7 +44,7 @@
         (let ([cmdline (parse-args)])
           (if (help-requested? cmdline)
               (display-help config)
-              (execute-command config))))))
+              (execute-command config cmdline))))))
 
 ;; What's the right way to do this?
 (main)
