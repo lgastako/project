@@ -7,8 +7,7 @@ INSTALL_DIR=~/local/bin
 all:
 	@cat Makefile
 
-#$(RACO) exe --gui project.rkt
-$(BINARY): project.rkt
+$(BINARY): *.rkt
 	$(RACO) exe project.rkt
 
 build: $(BINARY)
