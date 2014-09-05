@@ -24,6 +24,9 @@
     (newline)
     args))
 
+(define (render-cmd in out cmdline)
+  out)
+
 (define (execute-command config cmdline)
   (display "Would execute command here.")
   (newline)
@@ -40,7 +43,8 @@
          [cmd-sym (string->symbol cmd-name)]
          [cmd (hash-ref cmds cmd-sym)]
          [out (hash-ref cmd 'out)]
-         [candidate out])
+         [in (hash-ref cmd 'in)]
+         [candidate (render-cmd in out cmdline)])
     (display "Candidate command: ")
     (display candidate)
     (newline))
