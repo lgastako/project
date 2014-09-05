@@ -4,8 +4,7 @@
 (provide display-help)
 
 (define (render-cmd-args command-def)
-  (let ([in (hash-ref command-def 'in)])
-    (format "(arg details would go here: )")))
+  (hash-ref command-def 'in))
 
 (define (help-requested? cmdline)
   (or (= 0 (vector-length cmdline))
@@ -51,12 +50,12 @@
 
     (display "  ")
     (display myself)
-    (display " --version")
+    (display " -v | --verbose")
     (newline)
 
     (display "  ")
     (display myself)
-    (display " -v | --verbose")
+    (display " --version")
     (newline)
 
     (newline)

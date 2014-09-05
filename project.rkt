@@ -35,6 +35,15 @@
   (newline)
   (pretty-print cmdline)
   (newline)
+  (let* ([cmds (hash-ref config 'commands)]
+         [cmd-name (vector-ref cmdline 0)]
+         [cmd-sym (string->symbol cmd-name)]
+         [cmd (hash-ref cmds cmd-sym)]
+         [out (hash-ref cmd 'out)]
+         [candidate out])
+    (display "Candidate command: ")
+    (display candidate)
+    (newline))
   true)
 
 (define (main)

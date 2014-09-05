@@ -1,6 +1,8 @@
 RACO=raco
 
-BINARY=./project
+APP=project
+
+BINARY=./$(APP)
 
 INSTALL_DIR=~/local/bin
 
@@ -8,12 +10,12 @@ all:
 	@cat Makefile
 
 $(BINARY): *.rkt
-	$(RACO) exe project.rkt
+	$(RACO) exe $(APP).rkt
 
 build: $(BINARY)
 
 clean:
-	\rm -rf ./project.app
+	\rm -rf $(BINARY)
 
 help: build
 	$(BINARY) --help
