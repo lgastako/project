@@ -209,3 +209,7 @@ Cyclic loops in in/out pairs will be detected and will result in an error.
 - Implement chaining
 - Implement cyclic loop detection.
 - Actually process buffer instead of 999999 (in cfg.rkt)
+- Handle case of no Projector.json
+- Allow specifying alternative Projector.json filename.
+- Treat empty Projector.json file as "{}" JSON.
+- Print a message about the Projector.json file being empty if there are no commands.
