@@ -25,25 +25,20 @@ help2:  # (no args should produce --help output)
 
 install: build
 	cp $(BINARY) $(INSTALL_DIR)
-	cp $(BINARY) $(INSTALL_DIR)/re
-	cp $(BINARY) $(INSTALL_DIR)/pro
 
 install-deps:
 	$(RACO) pkg install "git://github.com/adolfopa/racket-mustache.git?path=mustache"
 
-run-hello: build
-	$(BINARY) hello
+run-b1: build
+	$(BINARY) build
 
-run-hi-user: build
-	$(BINARY) hi
+run-b2: build
+	$(BINARY) build foo/bar/baz
 
-run-hi-john: build
-	$(BINARY) hi john
 
 b: build
 h: help
 h2: help2
 i: install
-rh: run-hello
-rhu: run-hi-user
-rhj: run-hi-john
+rb1: run-b1
+rb2: run-b2
