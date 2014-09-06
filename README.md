@@ -23,6 +23,7 @@ If you commonly run commands like this:
 Where <prog> is almost always /bin/bash but occasionally other commands
 (possibly with arguments), then you could create a Project.json like so:
 
+```json
     {
         "commands": {
             "run": {
@@ -34,6 +35,7 @@ Where <prog> is almost always /bin/bash but occasionally other commands
             }
         }
     }
+```
 
 which would allow you to run this command:
 
@@ -54,6 +56,7 @@ translated into this:
 You can add multiple sub commands to the same Projector.json, and a nested
 "project.name" key to override the program name in the help out. eg.
 
+```json
     {
         "project": {
             "name": "Self Demo - Project Specific Commands"
@@ -87,6 +90,7 @@ You can add multiple sub commands to the same Projector.json, and a nested
             }
         }
     }
+```
 
 which would allow for
 
