@@ -5,7 +5,7 @@
 (require json)
 
 (define (load-config)
-  (with-input-from-file "Project.json"
+  (with-input-from-file "Projector.json"
     (lambda ()
       ;; TODO: Actually process buffer instead of 999999
       (let* ([contents (read-string 999999)])
