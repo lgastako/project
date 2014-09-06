@@ -21,7 +21,9 @@
   (newline)
 
   (let* ([default-project-section (make-hasheq)]
-         [default-project-name "Project Specific Commands"]
+         [pwd (format "~a" (current-directory))]
+         [dir-name (last (string-split (string-trim pwd "/") "/"))]
+         [default-project-name (string-append dir-name " " "Project Specific Commands")]
          [default-commands (list)]
          [myself "project"]
          [project-section (hash-ref config 'project default-project-section)]
