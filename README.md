@@ -1,21 +1,17 @@
-# project
+# Projector
 
-Yes, this project is named "project."  Good luck searching for it. :)
+Projector is nowhere near working.  I'm trying to spec it out via writing this
+README as if it were already complete.  Then I'll build to that spec.
 
-This project also is nowhere near working.  I'm trying to spec it out via
-writing this README as if it were already complete.  Then I'll build to that
-spec.
+The idea is that any given project has some common commands that need to be run,
+so we create a Projector.json file that is like a Makefile or Vagrantfile in
+that it sits in the root of your project and contains project specific settings.
 
-The idea is that any given project has some common commands that need to be
-run, so we create a Project.json file that is like a Makefile or Vagrantfile,
-what have you, in that it sits in the root of your project and contains
-project specific settings.
+In the case of a Projector.json file the settings describe synthetic project
+specific command forms.
 
-In the case of a Project.json file though, the settings describe synthetic
-project-specific commands.
-
-So you can think of project as 'project'ing your shortened/cleaned up commands
-from the short version to the full version.
+So you can think of Projector as "projecting" your shortened/cleaned up commands
+from the short version to the long version.
 
 
 ## Examples
@@ -39,23 +35,23 @@ Where <prog> is almost always /bin/bash but occasionally other commands
         }
     }
 
-Which would allow you to run this command:
+which would allow you to run this command:
 
     $ project run c4b2d4b3
 
-And have it translated into this:
+and have it translated into this:
 
     $ docker run c4b2d4b3 -t -i /bin/bash
 
-Or this:
+or this:
 
     $ project run 86c19ba9 run-server --port 8080
 
-Translated into this:
+translated into this:
 
     $ docker run 86c19ba9 -t -i run-server --port 8080
 
-You can add multiple sub commands to the same Projectfile, and a nested
+You can add multiple sub commands to the same Projector.json, and a nested
 "project.name" key to override the program name in the help out. eg.
 
     {
@@ -157,11 +153,24 @@ equivalent:
     $ project r foo bar    -> $ project run foo bar     -> $ docker run foo -t -i bar
     $ project v u          -> $ project vm up           -> $ vagrant up
 
+If you go so far as to create an alias something like this:
+
+    alias p=project
+
+Then you end up with something like this:
+
+    $ p b            -> $ project build           -> $ docker build .
+    $ p b foo        -> $ project build foo       -> $ docker build foo
+    $ p s foo        -> $ project shell foo       -> $ docker run foo -t -i /bin/bash
+    $ p r foo        -> $ project run foo         -> $ docker run foo -t -i /bin/bash
+    $ p r foo bar    -> $ project run foo bar     -> $ docker run foo -t -i bar
+    $ p v u          -> $ project vm up           -> $ vagrant up
 
 ## Chaining Commands
 
-When you use a "project foo ..." command as command in the out list project will
-recursively evaluate the command until it lands on a non "project... " command.
+When the output of one command is another Project command (i.e. "project ...")
+then Projector will follow the chain internally without executing new processes
+until it lands on a non "project ..." form.
 
 Cyclic loops in in/out pairs will be detected and will result in an error.
 
@@ -177,52 +186,3 @@ Cyclic loops in in/out pairs will be detected and will result in an error.
 - Implement shortcuts
 - Implement chaining
 - Implement cyclic loop detection.
-
-- Come up with a better name.
-
-  - Context? ctx?
-    eg. "ctx build blah" or "c b blah"
-
-  - do
-    eg. "do build blah" or "d b blah"
-
-  - pro
-    - (short for project, but also like a pro...)
-
-  - boss
-    - (kinda in the same vein but probably slightly more searchable? and maybe
-       more badass)
-
-  - ject
-    - the latter half of "project"
-
-  - j for ject/john
-
-  - re
-    - because you're always re-doing the same things, thats why you made them into commands
-      - re build
-      - re up
-      - re compile
-      - re css
-      - hmmmm
-    - how searchable is "re" though? but "re commander" or something... where
-      the command is "re" but the name is longer... "re command line steroids"
-      or "re-alias" ? think more
-
-  - cmd
-    - con: clashses with DOS cmd shell
-      - could do "cmds" or "cmdz" or something but that doesn't have the same ring
-        - maybe "commando" with a hint towards "command do"
-
-  - projector
-    - I like this name and it goes with the notion that you're projecting the in
-      form of the command into the out form, but the question then becomes what
-      should the command be?  It should be short.
-
-      Ideas:
-      - p
-      - pj
-      - pro
-      - proj
-
-  - Something arbitrary like gulp/grunt/etc
