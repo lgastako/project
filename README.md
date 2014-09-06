@@ -208,3 +208,4 @@ Cyclic loops in in/out pairs will be detected and will result in an error.
 - Implement shortcuts
 - Implement chaining
 - Implement cyclic loop detection.
+- Actually process buffer instead of 999999 (in cfg.rkt)
