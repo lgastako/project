@@ -20,49 +20,77 @@ from the short version to the full version.
 
 ## Examples
 
-If you commonly run this command:
+If you commonly run commands like this:
 
-    $ docker build <container_id> -t -i <prog:/bin/bash>
+    $ docker run <container_id> -t -i <prog>>
 
-You could create a Projectfile like so:
+Where <prog> is almost always /bin/bash but occasionally other commands
+(possibly with arguments), then you could create a Project.json like so:
 
-    build:
-      in: $(CONTAINER_ID) $(PROG:/bin/bash)
-      out: docker build $(CONTAINER_ID) -t -i $(PROG)
+    {
+        "commands": {
+            "run": {
+                "in": "<container_id> [<prog> <args>...]",
+                "defaults": {
+                    "<prog>": "/bin/bash"
+                },
+                "out": "docker run <container_id> -t -i <prog> <args>"
+            }
+        }
+    }
 
 Which would allow you to run this command:
 
-    $ project build c4b2d4b
+    $ project run c4b2d4b3
 
 And have it translated into this:
 
-    $ docker build c4b2d4b -t -i /bin/bash
+    $ docker run c4b2d4b3 -t -i /bin/bash
 
-Or this command:
+Or this:
 
-    $ project build web runserver
+    $ project run 86c19ba9 run-server --port 8080
 
-And have it translated into this:
+Translated into this:
 
-    $ project build web -t -i runserver
+    $ docker run 86c19ba9 -t -i run-server --port 8080
 
-You can add multiple sub commands to the same Projectfile, eg.
+You can add multiple sub commands to the same Projectfile, and a nested
+"project.name" key to override the program name in the help out. eg.
 
-    build:
-      in: $(DIR:.)
-      out: docker build $(DIR)
-
-    run:
-      in: $(CONTAINER_ID) $(PROG:/bin/bash)
-      out: docker run $(CONTAINER_ID) -t -i $(PROG)
-
-    shell:
-      in: $(CONTAINER_ID)
-      out: project run $(CONTAINER_ID)
-
-    vm:
-      in: up
-      out: vagrant up
+    {
+        "project": {
+            "name": "Self Demo - Project Specific Commands"
+        },
+        "commands": {
+            "build": {
+                "in": "[--dir=<dir>]",
+                "defaults": {
+                    "<dir>": "."
+                },
+                "out": "docker build <dir>"
+            },
+            "run": {
+                "in": "<container_id> [<prog> <args>...]",
+                "defaults": {
+                    "<prog>": "/bin/bash"
+                },
+                "out": "docker run <container_id> -t -i <prog> <args>"
+            },
+            "shell": {
+                "in": "<container_id>",
+                "out": "project run <container_id>"
+            },
+            "vm up": {
+                "in": "",
+                "out": "vagrant up"
+            },
+            "vm down": {
+                "in": "",
+                "out": "vagrant down"
+            }
+        }
+    }
 
 which would allow for
 
@@ -97,16 +125,17 @@ etc...
 
 ## Help generation
 
-The --help output will be generated automatically.  E.g. for the example above,
-it would be something like this:
+The --help output will be generated automatically.  Continuing with our example,
+in our case it would be something like this:
 
-    Project Specific Commands
+    Self Demo - Project Specific Commands
 
     Usage:
-      project build [<dir>]
-      project run <container_id> [<prog>]
+      project build [--dir=<dir>]
+      project run <container_id> [<prog> <args>...]
       project shell <container_id>
-      project vm [up|down]
+      project vm up
+      project vm down
       project -h | --help
       project --version
 
@@ -117,60 +146,37 @@ it would be something like this:
 
 ## Shortcuts
 
-You can define shortcuts, like "b" for "build" or "r" for run.  Then you can
-alias "p" to "project" and end up typing commands like "p b" for "project build"
-which gets further expanded, etc.
+You only need to include as much of the command as is necessary to disambiguate
+it, so continuing with our example, the following commands would all be
+equivalent:
+
+    $ project b            -> $ project build           -> $ docker build .
+    $ project b foo        -> $ project build foo       -> $ docker build foo
+    $ project s foo        -> $ project shell foo       -> $ docker run foo -t -i /bin/bash
+    $ project r foo        -> $ project run foo         -> $ docker run foo -t -i /bin/bash
+    $ project r foo bar    -> $ project run foo bar     -> $ docker run foo -t -i bar
+    $ project v u          -> $ project vm up           -> $ vagrant up
 
 
 ## Chaining Commands
 
-When you use a "project foo ..." command as command in the out list project will recursively evaluate the command until it lands on a non "project... " command.
+When you use a "project foo ..." command as command in the out list project will
+recursively evaluate the command until it lands on a non "project... " command.
 
 Cyclic loops in in/out pairs will be detected and will result in an error.
 
 
-## JSON Config Format Strawman
-
-    {
-        "project ": {
-            "name": "My Awesome Project"
-        },
-        "commands": {
-            "hello": {
-                "in": "<name>",
-                "out": "echo 'Hello <name>.'",
-                "defaults ": {
-                    "<name>": "user"
-                }
-            },
-            "build": {
-                "in": "$(DIR:.)",
-                "out": "docker build $(DIR)"
-            },
-            "run": {
-                "in": "$(CONTAINER_ID) $(PROG:/bin/bash)",
-                "out": "docker run $(CONTAINER_ID) -t -i $(PROG)"
-            },
-            "shell": {
-                "in": "$(CONTAINER_ID)",
-                "out": "project run $(CONTAINER_ID)"
-            },
-            "vm": {
-                "in": "up",
-                "out": "vagrant up"
-            }
-        }
-    }
-
 ## TODO
 
-- Implement in parsing
+- Implement docopt
+- Use generated help as input to docopt
 - Implement out parsing
 - Implement command execution
 - Implement default parsing
 - Finish help generation
-- Allow command definitions to either be a map (for a single form of the command)
-  or a list of maps (for a command with multiple forms)
+- Implement shortcuts
+- Implement chaining
+- Implement cyclic loop detection.
 
 - Come up with a better name.
 
@@ -207,5 +213,16 @@ Cyclic loops in in/out pairs will be detected and will result in an error.
     - con: clashses with DOS cmd shell
       - could do "cmds" or "cmdz" or something but that doesn't have the same ring
         - maybe "commando" with a hint towards "command do"
+
+  - projector
+    - I like this name and it goes with the notion that you're projecting the in
+      form of the command into the out form, but the question then becomes what
+      should the command be?  It should be short.
+
+      Ideas:
+      - p
+      - pj
+      - pro
+      - proj
 
   - Something arbitrary like gulp/grunt/etc

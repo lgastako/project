@@ -1,18 +1,33 @@
 {
     "project": {
-        "name": "Project Self-Demo - Project Specific Commands"
+        "name": "Self Demo - Project Specific Commands"
     },
     "commands": {
-        "hello": {
-            "in": "",
-            "out": "echo Hello world."
-        },
-        "hi": {
-            "in": "[--name=<name>]",
-            "out": "echo Hello <name>",
+        "build": {
+            "in": "[--dir=<dir>]",
             "defaults": {
-                "<name>": "User"
-            }
+                "<dir>": "."
+            },
+            "out": "docker build <dir>"
+        },
+        "run": {
+            "in": "<container_id> [<prog> <args>...]",
+            "defaults": {
+                "<prog>": "/bin/bash"
+            },
+            "out": "docker run <container_id> -t -i <prog> <args>"
+        },
+        "shell": {
+            "in": "<container_id>",
+            "out": "project run <container_id>"
+        },
+        "vm up": {
+            "in": "",
+            "out": "vagrant up"
+        },
+        "vm down": {
+            "in": "",
+            "out": "vagrant down"
         }
     }
 }
