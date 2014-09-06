@@ -94,12 +94,14 @@ You can add multiple sub commands to the same Projector.json, and a nested
 
 which would allow for
 
+```bash
     $ project build           -> $ docker build .
     $ project build foo       -> $ docker build foo
     $ project shell foo       -> $ docker run foo -t -i /bin/bash
     $ project run foo         -> $ docker run foo -t -i /bin/bash
     $ project run foo bar     -> $ docker run foo -t -i bar
     $ project vm up           -> $ vagrant up
+```
 
 etc...
 
