@@ -18,7 +18,9 @@ from the short version to the long version.
 
 If you commonly run commands like this:
 
+```bash
     $ docker run <container_id> -t -i <prog>>
+```
 
 Where <prog> is almost always /bin/bash but occasionally other commands
 (possibly with arguments), then you could create a Project.json like so:
@@ -39,19 +41,27 @@ Where <prog> is almost always /bin/bash but occasionally other commands
 
 which would allow you to run this command:
 
+```bash
     $ project run c4b2d4b3
+```
 
 and have it translated into this:
 
+```bash
     $ docker run c4b2d4b3 -t -i /bin/bash
+```
 
 or this:
 
+```bash
     $ project run 86c19ba9 run-server --port 8080
+```
 
 translated into this:
 
+```bash
     $ docker run 86c19ba9 -t -i run-server --port 8080
+```
 
 You can add multiple sub commands to the same Projector.json, and a nested
 "project.name" key to override the program name in the help out. eg.
@@ -152,25 +162,31 @@ You only need to include as much of the command as is necessary to disambiguate
 it, so continuing with our example, the following commands would all be
 equivalent:
 
+```bash
     $ project b            -> $ project build           -> $ docker build .
     $ project b foo        -> $ project build foo       -> $ docker build foo
     $ project s foo        -> $ project shell foo       -> $ docker run foo -t -i /bin/bash
     $ project r foo        -> $ project run foo         -> $ docker run foo -t -i /bin/bash
     $ project r foo bar    -> $ project run foo bar     -> $ docker run foo -t -i bar
     $ project v u          -> $ project vm up           -> $ vagrant up
+```
 
 If you go so far as to create an alias something like this:
 
-    alias p=project
+```bash
+    $ alias p=project
+```
 
 Then you end up with something like this:
 
+```bash
     $ p b            -> $ project build           -> $ docker build .
     $ p b foo        -> $ project build foo       -> $ docker build foo
     $ p s foo        -> $ project shell foo       -> $ docker run foo -t -i /bin/bash
     $ p r foo        -> $ project run foo         -> $ docker run foo -t -i /bin/bash
     $ p r foo bar    -> $ project run foo bar     -> $ docker run foo -t -i bar
     $ p v u          -> $ project vm up           -> $ vagrant up
+```
 
 ## Chaining Commands
 
