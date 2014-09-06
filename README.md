@@ -73,7 +73,7 @@ You can add multiple sub commands to the same Projector.json, and a nested
         },
         "commands": {
             "build": {
-                "in": "[--dir=<dir>]",
+                "in": "[<dir>]",
                 "defaults": {
                     "<dir>": "."
                 },

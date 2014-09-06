@@ -4,7 +4,7 @@
     },
     "commands": {
         "build": {
-            "in": "[--dir=<dir>]",
+            "in": "[<dir>]",
             "defaults": {
                 "<dir>": "."
             },
