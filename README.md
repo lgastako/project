@@ -203,4 +203,9 @@ Cyclic loops in in/out pairs will be detected and will result in an error.
       the command is "re" but the name is longer... "re command line steroids"
       or "re-alias" ? think more
 
+  - cmd
+    - con: clashses with DOS cmd shell
+      - could do "cmds" or "cmdz" or something but that doesn't have the same ring
+        - maybe "commando" with a hint towards "command do"
+
   - Something arbitrary like gulp/grunt/etc
